@@ -9,14 +9,15 @@
 }
 
 :root {
-    --color-pink: #feecea;
+    /* --- LAVENDER THEME PALETTE --- */
+    --color-pink: #F3E5F5;        /* Main Light Lavender Background */
     --color-white: #fff;
     --color-black: #333;
-    --color-text-pink: #FF7882;
-    --color-text-blue: #4287f5;
-    --color-heart: #FF7882;
+    --color-text-pink: #BA68C8;   /* Orchid / Violet Accent */
+    --color-text-blue: #9575CD;   /* Deep Lavender/Purple */
+    --color-heart: #BA68C8;       /* Matches the accent */
     --color-bg-letter: #fff8e4;
-    --color-border: #DACCBF;
+    --color-border: #D1C4E9;      /* Soft Purple Border */
 }
 
 html {
@@ -35,6 +36,7 @@ body {
 #wrapper {
     position: relative;
     background-color: transparent;
+    /* Updated grid lines to be white on lavender */
     background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 1) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 1) 76%, transparent 77%, transparent);
     height: 100%;
     background-size: 80px 80px;
@@ -90,13 +92,12 @@ body {
 /* --- BUTTONS CONTAINER --- */
 .left .buttons {
     display: flex;
-    gap: 15px; /* Space between buttons */
+    gap: 15px;
     margin-top: 30px;
     transform: scale(0);
     animation: scaleCricle 2s 16s forwards ease-in-out;
 }
 
-/* SHARED BUTTON STYLES */
 .btn-style {
     position: relative;
     background-color: var(--color-text-pink);
@@ -112,7 +113,7 @@ body {
     cursor: pointer;
     z-index: 2;
     transition: all .5s ease-in-out;
-    color: var(--color-black);
+    color: var(--color-black); /* kept text black for contrast */
 }
 
 .btn-style:active {
@@ -134,9 +135,9 @@ body {
     animation: rotateHeart 1s infinite linear;
 }
 
-/* Blue Button Variant */
+/* Second Button Variant - Lavender/Blue */
 #btn__letter_2 {
-    background-color: #a2cffe;
+    background-color: #D1C4E9; /* Soft Purple/Blue */
 }
 #btn__letter_2:hover {
     background-color: var(--color-text-blue);
@@ -554,7 +555,6 @@ body {
         flex-direction: column;
         perspective: 1000px;
     }
-    
     .cricle {
         position: absolute;
         top: 10px;
@@ -573,12 +573,10 @@ body {
         z-index: -1;
         animation: topHat 4s 7s forwards ease;
     }
-    
     .boxMail-container {
         width: 90vw !important;
         height: 315px !important;
     }
-    
     .content__letter .right .love__img {
         opacity: 0;
         position: absolute;
@@ -657,21 +655,16 @@ body {
 
 .boxMail-container.open {
     transform: rotate(-5deg);
-    filter: drop-shadow(0 0 10px #FF7882);
+    filter: drop-shadow(0 0 10px #BA68C8); /* Changed glow to purple */
 }
 
-/* CARD 1 (COVER) */
+/* =========================================
+   CARD 1: THE FLAP (Cover)
+   ========================================= */
 .boxMail-container .card1 {
     position: absolute;
     width: 50%;
     height: 100%;
-    /* Default Pink */
-    background: linear-gradient(to right, #FF7882, #FF7882 63%);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     z-index: 2;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
@@ -680,23 +673,29 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid black;
     
-    /* CRITICAL FIX: This prevents seeing the mirrored text when cover flips */
-    backface-visibility: hidden; 
+    /* STYLING - Lavender Gradient */
+    background: linear-gradient(to right, #BA68C8, #BA68C8 63%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid black;
 }
 
-/* Blue Variation for Box 2 */
+/* Blue Variant Card 1 - Kept somewhat distinct or made deep purple */
 #boxMail2 .card1 {
-    background: linear-gradient(to right, #4287f5, #4287f5 63%);
+    background: linear-gradient(to right, #9575CD, #9575CD 63%);
 }
 
-/* CARD 1 OPEN ANIMATION */
+/* ANIMATION: ROTATE FLAP OPEN */
 .boxMail-container.open .card1 {
     left: 25%;
-    transform: translate(-50%, -50%) rotateY(-160deg);
+    transform: translate(-50%, -50%) rotateY(-180deg);
 }
 
+/* Card 1 Content */
 .boxMail-container .card1 .userImg {
     position: relative;
     width: 80px;
@@ -708,14 +707,12 @@ body {
     cursor: pointer;
     margin-bottom: 20px;
 }
-
 .boxMail-container .card1 .userImg img {
     position: absolute;
     object-fit: cover;
-    width: calc(100%);
-    height: calc(100%);
+    width: 100%;
+    height: 100%;
 }
-
 .boxMail-container .card1 h3 {
     font-family: 'Dancing Script', cursive;
     font-size: 40px;
@@ -728,49 +725,52 @@ body {
     text-shadow: 0 0 5px white, 0 0 10px white;
 }
 
-/* CARD 2 (LEFT PAGE) */
+/* =========================================
+   CARD 2: THE LEFT PAGE (Revealed under cover)
+   ========================================= */
 .boxMail-container .card2 {
     position: absolute;
     width: 50%;
     height: 100%;
-    background: linear-gradient(to right, #e0e0e0, #ffffff 30%);
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    transform-origin: left;
-    transition: all 1s;
     z-index: 1; /* Behind cover initially */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid black;
+    
+    /* Styling - White with purple tint */
+    background: linear-gradient(to right, #e0e0e0, #ffffff 30%);
+    display: flex;
+    flex-direction: column;
 }
 
-/* CARD 2 OPEN ANIMATION */
+/* ANIMATION: MOVE LEFT (Matches Cover Position) */
 .boxMail-container.open .card2 {
-    left: 25%; /* Moves to the left side */
-    z-index: 1;
+    left: 25%; 
+    z-index: 10; /* CRITICAL: Moves on TOP of flipped Card 1 */
+    transform: translate(-50%, -50%) translateZ(1px); /* Slight bump to avoid Z-fighting */
 }
 
 .boxMail-container .card2 .card2-content {
     width: 100%;
     height: 100%;
     position: relative;
-    /* Default Pink */
-    background-color: #FF7882;
+    /* Main Card Color */
+    background-color: #BA68C8; 
     transition: all 1s;
     overflow: hidden;
     font-family: "Inter", serif;
     color: #fff;
+    
+    /* CENTER ALIGNMENT FOR SHORT TEXT */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-/* Blue Variation for Box 2 */
+/* Variant Card 2 */
 #boxMail2 .card2 .card2-content {
-    background-color: #4287f5;
-}
-
-.boxMail-container.open .card2-content {
-    transform: translate(0px, 0px);
-    box-shadow: none;
+    background-color: #9575CD;
 }
 
 .boxMail-container .card2 h3 {
@@ -779,19 +779,13 @@ body {
     opacity: 0;
     visibility: hidden;
     font-size: 25px;
-    /* Default Pink Shadow */
-    text-shadow: 0 0 8px #FF7882;
+    text-shadow: 0 0 8px #BA68C8;
 }
-/* Blue Shadow */
-#boxMail2 .card2 h3 {
-     text-shadow: 0 0 8px #4287f5;
-}
-
+#boxMail2 .card2 h3 { text-shadow: 0 0 8px #9575CD; }
 
 .boxMail-container.open .card2 h3 {
     animation: texth3 3s forwards;
     animation-delay: 1s;
-    transition: 1s;
 }
 
 @keyframes texth3 {
@@ -818,7 +812,6 @@ body {
 .boxMail-container.open .card2 h2 {
     animation: texth2 2s forwards;
     animation-delay: 1.5s;
-    transition: 1s;
 }
 
 @keyframes texth2 {
@@ -826,17 +819,17 @@ body {
     100% { opacity: 1; }
 }
 
-/* CARD 3 (RIGHT PAGE) */
+/* =========================================
+   CARD 3: THE RIGHT PAGE
+   ========================================= */
 .boxMail-container .card3 {
     position: absolute;
     width: 50%;
     height: 100%;
-    /* Default Pink */
-    background: #FF7882;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+    /* Main Card Color */
+    background: #BA68C8;
     transition: all 1s;
-    z-index: 0;
+    z-index: 0; /* Behind everything initially */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -847,26 +840,26 @@ body {
     flex-direction: column;
     align-items: center;
     
-    /* CRITICAL FIX: Align content from TOP */
+    /* ALIGN FROM TOP */
     justify-content: flex-start;
     padding-top: 40px;
 }
 
-/* Blue Variation */
+/* Variant Card 3 */
 #boxMail2 .card3 {
-    background: #4287f5;
+    background: #9575CD;
 }
 
-/* CARD 3 OPEN ANIMATION */
+/* ANIMATION: SLIDE RIGHT */
 .boxMail-container.open .card3 {
-    left: 75%; /* Moves to the right side */
+    left: 75%;
 }
 
 .boxMail-container .card3 h2 {
      font-family: 'Dancing Script', cursive;
      font-size: 22px;
      text-align: center;
-     padding: 0 20px; /* Side padding */
+     padding: 0 20px;
      opacity: 0;
 }
 
@@ -888,6 +881,25 @@ body {
     transition: 1s;
     opacity: 1;
 }
+
+/* --- SIGNATURE STYLES --- */
+.signature {
+    margin-top: auto; /* Pushes text to bottom */
+    margin-bottom: 25px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    opacity: 0;
+    color: white;
+}
+
+.boxMail-container.open .signature {
+    animation: fadeInSig 2s forwards 3.5s; /* Delays appearance */
+}
+
+@keyframes fadeInSig {
+    to { opacity: 1; }
+}
+
 
 @keyframes cute3 {
     0% { transform: rotate(0deg); }
