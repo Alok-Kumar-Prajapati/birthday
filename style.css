@@ -13,6 +13,7 @@
     --color-white: #fff;
     --color-black: #333;
     --color-text-pink: #FF7882;
+    --color-text-blue: #4287f5;
     --color-heart: #FF7882;
     --color-bg-letter: #fff8e4;
     --color-border: #DACCBF;
@@ -86,17 +87,21 @@ body {
     width: 60%;
 }
 
-.left .btn {
+/* --- BUTTONS CONTAINER --- */
+.left .buttons {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+    margin-top: 30px;
     transform: scale(0);
     animation: scaleCricle 2s 16s forwards ease-in-out;
 }
 
-#btn__letter {
+/* SHARED BUTTON STYLES */
+.btn-style {
     position: relative;
-    margin-top: 30px;
     background-color: var(--color-text-pink);
     outline: none;
-    padding: 5px 15px;
+    padding: 8px 18px;
     font-size: 1rem;
     border-radius: 50px;
     border: 3px solid var(--color-black);
@@ -106,28 +111,38 @@ body {
     justify-content: center;
     cursor: pointer;
     z-index: 2;
-    transform: scale(1);
     transition: all .5s ease-in-out;
+    color: var(--color-black);
 }
 
-#btn__letter:active {
+.btn-style:active {
     transform: scale(0.7);
 }
 
-#btn__letter i {
+.btn-style i {
     margin-left: 5px;
 }
 
-#btn__letter:hover {
+.btn-style:hover {
     border-color: var(--color-heart);
     background-color: var(--color-heart);
     color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-#btn__letter:hover i {
+.btn-style:hover i {
     animation: rotateHeart 1s infinite linear;
 }
+
+/* Blue Button Variant */
+#btn__letter_2 {
+    background-color: #a2cffe;
+}
+#btn__letter_2:hover {
+    background-color: var(--color-text-blue);
+    border-color: var(--color-text-blue);
+}
+
 
 @keyframes rotateHeart {
     0%, 50%, 100% {
@@ -539,24 +554,7 @@ body {
         flex-direction: column;
         perspective: 1000px;
     }
-    #btn__letter {
-        position: relative;
-        margin-top: 17px;
-        width: 209px;
-        background-color: var(--color-text-pink);
-        outline: none;
-        padding: 6px 4px;
-        font-size: 1rem;
-        border-radius: 50px;
-        border: 3px solid var(--color-black);
-        font-family: "Sriracha", cursive;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 2;
-        transition: all .5s ease-in-out;
-    }
+    
     .cricle {
         position: absolute;
         top: 10px;
@@ -575,10 +573,12 @@ body {
         z-index: -1;
         animation: topHat 4s 7s forwards ease;
     }
-    .boxMail .boxMail-container {
+    
+    .boxMail-container {
         width: 90vw !important;
         height: 315px !important;
     }
+    
     .content__letter .right .love__img {
         opacity: 0;
         position: absolute;
@@ -618,9 +618,9 @@ body {
     }
 }
 
-/* --- NEW MAILBOX STYLES --- */
+/* --- UNIVERSAL MAILBOX STYLES --- */
 
-.boxMail {
+.boxMail-common {
     position: fixed;
     background: rgb(0, 0, 0, 0.8);
     width: 100%;
@@ -636,13 +636,13 @@ body {
     z-index: 100000000;
 }
 
-.boxMail.active {
+.boxMail-common.active {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
 }
 
-.boxMail .boxMail-container {
+.boxMail-container {
     position: absolute;
     width: 750px;
     height: 500px;
@@ -655,16 +655,17 @@ body {
     cursor: pointer;
 }
 
-.boxMail .boxMail-container.open {
+.boxMail-container.open {
     transform: rotate(-5deg);
     filter: drop-shadow(0 0 10px #FF7882);
 }
 
 /* CARD 1 (COVER) */
-.boxMail .boxMail-container .card1 {
+.boxMail-container .card1 {
     position: absolute;
     width: 50%;
     height: 100%;
+    /* Default Pink */
     background: linear-gradient(to right, #FF7882, #FF7882 63%);
     color: white;
     display: flex;
@@ -680,16 +681,23 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid black;
+    
+    /* CRITICAL FIX: This prevents seeing the mirrored text when cover flips */
+    backface-visibility: hidden; 
+}
+
+/* Blue Variation for Box 2 */
+#boxMail2 .card1 {
+    background: linear-gradient(to right, #4287f5, #4287f5 63%);
 }
 
 /* CARD 1 OPEN ANIMATION */
-.boxMail .boxMail-container.open .card1 {
-    /* Moves to left side and rotates */
+.boxMail-container.open .card1 {
     left: 25%;
     transform: translate(-50%, -50%) rotateY(-160deg);
 }
 
-.boxMail .boxMail-container .card1 .userImg {
+.boxMail-container .card1 .userImg {
     position: relative;
     width: 80px;
     height: 80px;
@@ -701,14 +709,14 @@ body {
     margin-bottom: 20px;
 }
 
-.boxMail .boxMail-container .card1 .userImg img {
+.boxMail-container .card1 .userImg img {
     position: absolute;
     object-fit: cover;
     width: calc(100%);
     height: calc(100%);
 }
 
-.boxMail .boxMail-container .card1 h3 {
+.boxMail-container .card1 h3 {
     font-family: 'Dancing Script', cursive;
     font-size: 40px;
     text-transform: uppercase;
@@ -717,12 +725,11 @@ body {
     line-height: 1.5;
     letter-spacing: 5px;
     transform: rotate(-5deg);
-    text-shadow: 0 0 5px white,
-        0 0 10px white;
+    text-shadow: 0 0 5px white, 0 0 10px white;
 }
 
 /* CARD 2 (LEFT PAGE) */
-.boxMail .boxMail-container .card2 {
+.boxMail-container .card2 {
     position: absolute;
     width: 50%;
     height: 100%;
@@ -731,22 +738,24 @@ body {
     transform-style: preserve-3d;
     transform-origin: left;
     transition: all 1s;
-    z-index: 1;
+    z-index: 1; /* Behind cover initially */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid black;
 }
 
-/* CARD 2 OPEN ANIMATION - SHIFTS LEFT */
-.boxMail .boxMail-container.open .card2 {
+/* CARD 2 OPEN ANIMATION */
+.boxMail-container.open .card2 {
     left: 25%; /* Moves to the left side */
+    z-index: 1;
 }
 
-.boxMail .boxMail-container .card2 .card2-content {
+.boxMail-container .card2 .card2-content {
     width: 100%;
     height: 100%;
     position: relative;
+    /* Default Pink */
     background-color: #FF7882;
     transition: all 1s;
     overflow: hidden;
@@ -754,21 +763,32 @@ body {
     color: #fff;
 }
 
-.boxMail .boxMail-container.open .card2-content {
-    transform: translate(0px, 0px); /* Reset translate for book effect */
+/* Blue Variation for Box 2 */
+#boxMail2 .card2 .card2-content {
+    background-color: #4287f5;
+}
+
+.boxMail-container.open .card2-content {
+    transform: translate(0px, 0px);
     box-shadow: none;
 }
 
-.boxMail .boxMail-container .card2 h3 {
+.boxMail-container .card2 h3 {
     font-family: 'Dancing Script', cursive;
     padding: 20px 0px 10px 60px;
     opacity: 0;
     visibility: hidden;
     font-size: 25px;
+    /* Default Pink Shadow */
     text-shadow: 0 0 8px #FF7882;
 }
+/* Blue Shadow */
+#boxMail2 .card2 h3 {
+     text-shadow: 0 0 8px #4287f5;
+}
 
-.boxMail .boxMail-container.open .card2 h3 {
+
+.boxMail-container.open .card2 h3 {
     animation: texth3 3s forwards;
     animation-delay: 1s;
     transition: 1s;
@@ -780,44 +800,39 @@ body {
         visibility: visible;
         padding: 20px 0px 10px 60px;
     }
-
     100% {
         opacity: 1;
         visibility: visible;
-        padding: 20px 0px 10px 40px; /* Adjusted padding */
+        padding: 20px 0px 10px 40px;
     }
 }
 
-.boxMail .boxMail-container .card2 h2 {
+.boxMail-container .card2 h2 {
     font-family: 'Dancing Script', cursive;
     padding: 0px 20px;
     text-indent: 20px;
-    font-size: 18px; /* Slightly smaller to fit */
+    font-size: 18px;
     opacity: 0;
 }
 
-.boxMail .boxMail-container.open .card2 h2 {
+.boxMail-container.open .card2 h2 {
     animation: texth2 2s forwards;
     animation-delay: 1.5s;
     transition: 1s;
 }
 
 @keyframes texth2 {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
-/* CARD 3 (NEW RIGHT PAGE) */
-.boxMail .boxMail-container .card3 {
+/* CARD 3 (RIGHT PAGE) */
+.boxMail-container .card3 {
     position: absolute;
     width: 50%;
     height: 100%;
-    background: #FF7882; /* Pink background to match */
+    /* Default Pink */
+    background: #FF7882;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     transition: all 1s;
@@ -831,34 +846,42 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    
+    /* CRITICAL FIX: Align content from TOP */
+    justify-content: flex-start;
+    padding-top: 40px;
 }
 
-/* CARD 3 OPEN ANIMATION - SLIDES RIGHT */
-.boxMail .boxMail-container.open .card3 {
+/* Blue Variation */
+#boxMail2 .card3 {
+    background: #4287f5;
+}
+
+/* CARD 3 OPEN ANIMATION */
+.boxMail-container.open .card3 {
     left: 75%; /* Moves to the right side */
 }
 
-.boxMail .boxMail-container .card3 h2 {
+.boxMail-container .card3 h2 {
      font-family: 'Dancing Script', cursive;
      font-size: 22px;
      text-align: center;
-     padding: 20px;
+     padding: 0 20px; /* Side padding */
      opacity: 0;
 }
 
-.boxMail .boxMail-container.open .card3 h2 {
+.boxMail-container.open .card3 h2 {
      animation: texth2 2s forwards;
      animation-delay: 2s;
 }
 
-.boxMail .boxMail-container .card3 .imageCute2 {
+.boxMail-container .card3 .imageCute2 {
     margin-top: 20px;
     opacity: 0;
     transition: 1s;
 }
 
-.boxMail .boxMail-container.open .card3 .imageCute2 {
+.boxMail-container.open .card3 .imageCute2 {
     animation: cute3 1s linear infinite,
         cute4 3s 2s forwards;
     animation-delay: 2s;
@@ -879,11 +902,11 @@ body {
     100% { transform: scale(1.1); }
 }
 
-.boxMail .boxMail-container .card3 .imageCute2 img {
+.boxMail-container .card3 .imageCute2 img {
     width: 100px;
 }
 
-.boxMail .fa-xmark {
+.fa-xmark {
     position: fixed;
     top: 0;
     right: 0;
