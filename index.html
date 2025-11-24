@@ -416,40 +416,49 @@
     </div>
 
     <script>
-        let datetxt = "27 May";
-        let charArrDate = datetxt.split('');
-        let currentIndex = 0;
-        let date__of__birth = document.querySelector(".date__of__birth span");
-        
-        setTimeout(function () {
-            timeDatetxt = setInterval(function () {
-                if (currentIndex < charArrDate.length) {
-                    date__of__birth.textContent += charArrDate[currentIndex];
-                    currentIndex++;
-                }
-                else {
-                    let i = document.createElement("i");
-                    i.className = "fa-solid fa-star"
-                    document.querySelector(".date__of__birth").prepend(i)
-                    document.querySelector(".date__of__birth").appendChild(i.cloneNode(true))
-                    clearInterval(timeDatetxt)
-                }
-            }, 100)
-        }, 12000)
+    let datetxt = "27 May";
+    let charArrDate = datetxt.split('');
+    let currentIndex = 0;
+    let date__of__birth = document.querySelector(".date__of__birth span");
 
-        // Mail box functionality
-        let mailBox = document.querySelector('.mail');
-        let boxmail = document.querySelector('.boxMail');
-        let close = document.querySelector('.fa-xmark');
-        
-        mailBox.onclick = function () {
-            boxmail.classList.add('active');
-        }
+    setTimeout(function () {
+        timeDatetxt = setInterval(function () {
+            if (currentIndex < charArrDate.length) {
+                date__of__birth.textContent += charArrDate[currentIndex];
+                currentIndex++;
+            }
+            else {
+                let i = document.createElement("i");
+                i.className = "fa-solid fa-star"
+                document.querySelector(".date__of__birth").prepend(i)
+                document.querySelector(".date__of__birth").appendChild(i.cloneNode(true))
+                clearInterval(timeDatetxt)
+            }
+        }, 100)
+    }, 12000)
 
-        close.addEventListener('click', function () {
-            boxmail.classList.remove('active');
-        })
-    </script>
+    // Mail box functionality
+    let mailBox = document.querySelector('.mail');
+    let boxmail = document.querySelector('.boxMail');
+    let close = document.querySelector('.fa-xmark');
+    let boxMailContainer = document.querySelector('.boxMail-container'); // Select the card container
+
+    mailBox.onclick = function () {
+        boxmail.classList.add('active');
+    }
+
+    close.addEventListener('click', function () {
+        boxmail.classList.remove('active');
+        // Optional: Close the card reset when closing the modal so it's closed next time
+        boxMailContainer.classList.remove('open'); 
+    })
+
+    // NEW CODE: Click the card to open it
+    boxMailContainer.addEventListener('click', function() {
+        this.classList.toggle('open');
+    });
+
+</script>
 </body>
 
 </html>
