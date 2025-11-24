@@ -1,0 +1,82 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffecf0;
+    text-align: center;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: 4em;
+    color: #ff67a3;
+    margin-top: 100px;
+    animation: fadeIn 2s ease-out;
+}
+
+.hidden {
+    display: none;
+}
+
+#birthday-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Balloons Animation */
+#balloon-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.balloon {
+    position: absolute;
+    bottom: -100px;
+    animation: float 5s ease-in infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100vh); }
+}
+
+/* Envelope Animation */
+#envelope {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+}
+
+#message {
+    font-size: 1.2em;
+    color: #ff67a3;
+}
+
+/* Animal GIFs */
+#cute-animals {
+    margin-top: 30px;
+}
+
+#cute-animals img {
+    width: 150px;
+    margin: 0 10px;
+    animation: bounce 2s infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
